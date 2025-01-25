@@ -11,6 +11,9 @@ ARCHIVE=nomad_$(VERSION)_linux_$(ARCH).zip
 
 SOURCE=https://releases.hashicorp.com/nomad/$(VERSION)/$(ARCHIVE)
 
+run:
+	nomad agent -dev -bind=0.0.0.0
+
 nomad:	$(ARCHIVE)
 	unzip -o $(ARCHIVE) nomad
 
