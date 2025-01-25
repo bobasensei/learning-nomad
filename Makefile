@@ -11,8 +11,15 @@ ARCHIVE=nomad_$(VERSION)_linux_$(ARCH).zip
 
 SOURCE=https://releases.hashicorp.com/nomad/$(VERSION)/$(ARCHIVE)
 
+nomad:	$(ARCHIVE)
+	unzip -o $(ARCHIVE) nomad
+
 $(ARCHIVE):
 	curl -O $(SOURCE)
 
 
+apt:
+	sudo apt install -u make unzip
 
+clean:
+	rm nomad $(ARCHIVE)
