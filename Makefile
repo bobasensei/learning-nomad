@@ -26,3 +26,12 @@ apt:
 
 clean:
 	rm nomad $(ARCHIVE)
+
+
+submodules:
+	mkdir -p externals
+ 	git submodule add https://github.com/hashicorp-education/learn-nomad-getting-started externals/learn-nomad-getting-started
+	git submodule update --init --recursive
+
+update:
+	git submodule update --init --recursive
