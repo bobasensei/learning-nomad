@@ -51,3 +51,22 @@ demo4:
 
 stores:
 	nomad job run bobadojo/stores.hcl
+
+jwt-env:
+	{ \
+	nomad job run identity/job-env.hcl; \
+	sleep 2; \
+	ALLOCATION=`curl -s http://localhost:4646/v1/job/identity-env/allocations | jq .[0].ID -r`; \
+	JWT=`nomad alloc logs $$ALLOCATION`; \
+	q jwt verify $$JWT --keyurl http://localhost:4646/.well-known/jwks.json; \
+	} \
+
+jwt-file:
+	{ \
+	nomad job run identity/job-file.hcl; \
+	sleep 2; \
+	ALLOCATION=`curl -s http://localhost:4646/v1/job/identity-file/allocations | jq .[0].ID -r`; \
+	JWT=`nomad alloc logs $$ALLOCATION`; \
+	q jwt verify $$JWT --keyurl http://localhost:4646/.well-known/jwks.json; \
+	} \
+
