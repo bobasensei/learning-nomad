@@ -1,4 +1,3 @@
-
 VERSION=1.9.5
 
 ifeq ($(shell uname -i), x86_64)
@@ -14,20 +13,17 @@ SOURCE=https://releases.hashicorp.com/nomad/$(VERSION)/$(ARCHIVE)
 run:
 	sudo ./nomad agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
 
-
 nomad:	$(ARCHIVE)
 	unzip -o $(ARCHIVE) nomad
 
 $(ARCHIVE):
 	curl -O $(SOURCE)
 
-
 apt:
 	sudo apt install -u make unzip
 
 clean:
 	rm nomad $(ARCHIVE)
-
 
 submodules:
 	mkdir -p externals
