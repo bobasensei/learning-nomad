@@ -19,9 +19,6 @@ nomad:	$(ARCHIVE)
 $(ARCHIVE):
 	curl -O $(SOURCE)
 
-apt:
-	sudo apt install -u make unzip
-
 clean:
 	rm nomad $(ARCHIVE)
 
