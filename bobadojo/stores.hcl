@@ -1,8 +1,6 @@
 job "stores-server" {
   datacenters = ["dc1"]
   type = "service"
-
-
   group "stores-server" {
     count = 1
     network {
@@ -11,9 +9,6 @@ job "stores-server" {
     service {
       name = "stores-server"
       provider = "nomad"
-      tags = [
-	"urlprefix-/" 
-      ]
       port = "http"
     }
     task "stores-server" {
@@ -22,7 +17,6 @@ job "stores-server" {
         image = "ghcr.io/bobadojo/stores-server:latest"
         ports = ["http"]
       }
-
     }
   }
 }
