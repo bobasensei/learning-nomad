@@ -26,14 +26,18 @@ job "accounts" {
       config {
         image = "ghcr.io/bobasensei/accounts-server"
         ports = ["http"]
+        command = "accounts-server"
+        args = [
+	  "--issuer",
+          "https://accounts.timbx.me",
+	  "--port",
+	  "9998",
+        ]
       }
       volume_mount {
         volume = "accounts-config"
         destination = "/config"
         read_only = true
-      }
-      env {
-        ISSUER = "https://accounts.timbx.me"
       }
     }
   }

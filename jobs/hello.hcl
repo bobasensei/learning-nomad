@@ -9,7 +9,7 @@ job "hello" {
   group "hello" {
     count = 1
     network {
-      port "http" { to = 80 }
+      port "http" {}
     }
     service {
       name = "hello"
@@ -19,6 +19,7 @@ job "hello" {
     task "hello" {
       driver = "docker"
       config {
+        network_mode = "host"
         image = "ghcr.io/bobasensei/hello-server"
         ports = ["http"]
       }
