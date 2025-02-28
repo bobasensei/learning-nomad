@@ -19,6 +19,9 @@ job "hello" {
     task "hello" {
       driver = "docker"
       config {
+	# this uses host networking to see the local /etc/hosts
+	# which it needs to resolve the issuer in isolated (test)
+	# environments
         network_mode = "host"
         image = "ghcr.io/bobasensei/hello-server"
         ports = ["http"]
