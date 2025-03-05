@@ -9,7 +9,7 @@ job "accounts" {
   group "accounts" {
     count = 1
     network {
-      port "http" { to = 9998 }
+      port "http" {}
     }
     service {
       name = "accounts"
@@ -18,7 +18,7 @@ job "accounts" {
     }
     volume "accounts-config" {
       type      = "host"
-      read_only = true
+      read_only = false
       source    = "accounts-config"
     }
     task "accounts" {
@@ -31,13 +31,13 @@ job "accounts" {
 	  "--issuer",
           "https://accounts.timbx.me",
 	  "--port",
-	  "9998",
+          "${NOMAD_PORT_http}",
         ]
       }
       volume_mount {
         volume = "accounts-config"
         destination = "/config"
-        read_only = true
+        read_only = false
       }
     }
   }
