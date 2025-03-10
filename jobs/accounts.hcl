@@ -9,12 +9,12 @@ job "accounts" {
   group "accounts" {
     count = 1
     network {
-      port "http" {}
+      port "http" { to = 9998 }
     }
     service {
       name = "accounts"
       provider = "nomad"
-      port = "http"
+      port  = "http"
     }
     volume "accounts-config" {
       type      = "host"
@@ -24,15 +24,10 @@ job "accounts" {
     task "accounts" {
       driver = "docker"
       config {
-        image = "ghcr.io/bobasensei/accounts-server"
+        #image = "ghcr.io/bobasensei/accounts-server"
+        image = "timburks/accounts-server:latest"
         ports = ["http"]
         command = "accounts-server"
-        args = [
-	  "--issuer",
-          "https://accounts.timbx.me",
-	  "--port",
-          "${NOMAD_PORT_http}",
-        ]
       }
       volume_mount {
         volume = "accounts-config"
