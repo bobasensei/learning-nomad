@@ -59,7 +59,7 @@ identity-env:
 	ALLOCATION=`curl -s http://localhost:4646/v1/job/identity-env/allocations | jq 'sort_by(-.CreateTime)' | jq .[0].ID -r`; \
 	JWT=`nomad alloc logs $$ALLOCATION`; \
 	echo $$JWT; \
-	q jwt verify $$JWT --keyurl http://localhost:4646/.well-known/jwks.json; \
+	satool jwt verify $$JWT --jwks_uri http://localhost:4646/.well-known/jwks.json; \
 	} \
 
 identity-file:
@@ -69,5 +69,5 @@ identity-file:
 	ALLOCATION=`curl -s http://localhost:4646/v1/job/identity-file/allocations | jq 'sort_by(-.CreateTime)' | jq .[0].ID -r`; \
 	JWT=`nomad alloc logs $$ALLOCATION`; \
 	echo $JWT; \
-	q jwt verify $$JWT --keyurl http://localhost:4646/.well-known/jwks.json; \
+	satool jwt verify $$JWT --jwks_uri http://localhost:4646/.well-known/jwks.json; \
 	} \
