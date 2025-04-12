@@ -24,8 +24,7 @@ job "accounts" {
     task "accounts" {
       driver = "docker"
       config {
-        #image = "ghcr.io/bobasensei/accounts-server"
-        image = "timburks/accounts-server:latest"
+        image = "ghcr.io/bobasensei/accounts-server"
         ports = ["http"]
         command = "accounts-server"
       }
